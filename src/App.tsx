@@ -3,11 +3,15 @@ import React, {ChangeEvent, useState} from "react";
 import {ITask} from "./Interfaces.ts";
 import TodoTask from "./Components/TodoTask.tsx";
 
+
+//App:React.FC format App function to be as the typescript standard
 const App:React.FC = () => {
+    //retrieve the data that are been passed in the input fields (useState)
     const [task, setTask] = useState<string>('');
     const [deadline, setDeadline] = useState<number>(0);
     const [todo, setTodo] = useState<ITask[]>([]);
 
+    //store what the user is writing
     const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
         if(event.target.name === 'task') {
             setTask(event.target.value);
@@ -16,6 +20,7 @@ const App:React.FC = () => {
         }
     }
 
+    //remove task if clicked 'X'
     const completeTask = (taskNameToDelete: string) => {
         setTodo(todo.filter((task)  => {
             return task.taskName != taskNameToDelete;
@@ -23,15 +28,19 @@ const App:React.FC = () => {
     }
 
     const addTask = () => {
+        //create task from current (task, deadline)
         const newTask = {
             taskName: task,
             deadline: deadline,
         }
+        //update array from tasks
         setTodo([...todo, newTask]);
+        //clear input fields
         setTask("");
         setDeadline(0);
     }
 
+    //elements that will be rendered in the browser
     return (
     <div className='App'>
         <div className='header'>

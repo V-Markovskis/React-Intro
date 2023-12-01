@@ -5,6 +5,8 @@ interface Props {
     completeTask(taskNameToDelete: string): void;
 }
 
+
+//html for added tasks and delete button
 const TodoTask = ({task, completeTask}: Props) => {
     return (
         <div className='task'>
